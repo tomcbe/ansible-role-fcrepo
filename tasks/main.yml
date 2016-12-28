@@ -1,0 +1,45 @@
+---
+- name: get java version
+  shell:   "java -version 2>&1"
+  register: java_version_result
+  changed_when: false
+
+- name: test java version
+  fail:
+    msg: "this installation of fedora requires java version {{ java_version }} or higher"
+  when:  "'{{ java_version }}' not in java_version_result.stdout"
+
+- name: get fedora checksum
+  set_fact:
+    fcrepo_checksum: "{{ fcrepo_checksum_algo }}:{{ item }}"
+  with_url: "{{ fcrepo_checksum_url }}"
+
+- name: get fedora
+  get_url:
+    url:      "{{ fcrepo_url }}"
+    dest:     "{{ webapps_dir }}"
+    checksum: "{{ fcrepo_checksum }}"
+  register: got_fedora
+  notify: restart tomcat
+
+- name: create fcrepo_config_dir
+  file:
+    path: "{{ fcrepo_config_dir }}"
+    state: directory
+
+- name: create fcrepo_home
+  file:
+    path: "{{ fcrepo_home }}"
+    state: directory
+
+- name: set fedora system properties
+  template:
+    src:  "fcrepo.sh.j2"
+    dest: "/etc/profile.d/fcrepo.sh"
+  notify: restart tomcat
+
+- name: configure fedora logging
+  template:
+    src:  "logback.xml.j2"
+    dest: "{{ fcrepo_config_dir }}/logback.xml"
+  notify: restart tomcat
