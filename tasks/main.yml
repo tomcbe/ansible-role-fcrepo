@@ -33,31 +33,10 @@
     - "{{ fcrepo_home }}"
     - "{{ fcrepo_log_dir }}"
 
-# - name: create fcrepo_home
-#   file:
-#     path: "{{ fcrepo_home }}"
-#     state: directory
-#     owner: "{{ app_user }}"
-#     group: "{{ app_user }}"
-#
-# - name: create fcrepo_log_dir
-#   file:
-#     path: "{{ fcrepo_log_dir }}"
-#     state: directory
-#     owner: "{{ app_user }}"
-#     group: "{{ app_user }}"
-
 - name: create tomcat service directory for additional configuration
   file:
     path: "/etc/systemd/system/tomcat.service.d"
     state: directory
-
-# - name: set fedora system properties
-#   template:
-#     src:  "fcrepo.sh.j2"
-#     dest: "/bin/setenv.sh"
-#     mode: "a+x"
-#   notify: restart tomcat
 
 - name: set fedora system properties
   template:
