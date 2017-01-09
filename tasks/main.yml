@@ -22,20 +22,47 @@
   register: got_fedora
   notify: restart tomcat
 
-- name: create fcrepo_config_dir
+- name: create fedora directories
   file:
-    path: "{{ fcrepo_config_dir }}"
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+  with_items:
+    - "{{ fcrepo_config_dir }}"
+    - "{{ fcrepo_home }}"
+    - "{{ fcrepo_log_dir }}"
+
+# - name: create fcrepo_home
+#   file:
+#     path: "{{ fcrepo_home }}"
+#     state: directory
+#     owner: "{{ app_user }}"
+#     group: "{{ app_user }}"
+#
+# - name: create fcrepo_log_dir
+#   file:
+#     path: "{{ fcrepo_log_dir }}"
+#     state: directory
+#     owner: "{{ app_user }}"
+#     group: "{{ app_user }}"
+
+- name: create tomcat service directory for additional configuration
+  file:
+    path: "/etc/systemd/system/tomcat.service.d"
     state: directory
 
-- name: create fcrepo_home
-  file:
-    path: "{{ fcrepo_home }}"
-    state: directory
+# - name: set fedora system properties
+#   template:
+#     src:  "fcrepo.sh.j2"
+#     dest: "/bin/setenv.sh"
+#     mode: "a+x"
+#   notify: restart tomcat
 
 - name: set fedora system properties
   template:
-    src:  "fcrepo.sh.j2"
-    dest: "/etc/profile.d/fcrepo.sh"
+    src: "fcrepo.conf.j2"
+    dest: "/etc/systemd/system/tomcat.service.d/fcrepo.conf"
   notify: restart tomcat
 
 - name: configure fedora logging

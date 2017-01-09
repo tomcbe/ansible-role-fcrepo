@@ -14,3 +14,18 @@ fcrepo_checksum_url:    "{{ fcrepo_url }}.{{ fcrepo_checksum_algo }}"
 tomcat_install_dir:     "/usr/local"
 catalina_home:          "{{ tomcat_install_dir }}/tomcat"
 webapps_dir:            "{{ catalina_home }}/webapps"
+app_user:               "tomcat"
+java_opts:              "-Djava.awt.headless=true
+                        -Dfile.encoding=UTF-8
+                        -Dfcrepo.home={{ fcrepo_home }}
+                        -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json
+                        -Dlogback.configurationFile={{ fcrepo_config_dir }}/logback.xml
+                        -XX:+UseConcMarkSweepGC
+                        -XX:+CMSClassUnloadingEnabled
+                        -XX:ConcGCThreads=5
+                        -XX:MaxGCPauseMillis=200
+                        -XX:ParallelGCThreads=20
+                        -XX:MaxMetaspaceSize=512M
+                        -Xms{{ minimum_heap_size }}m
+                        -Xmx{{ maximum_heap_size }}m"
+catalina_opts:          "-server"
