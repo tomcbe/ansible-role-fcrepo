@@ -30,7 +30,7 @@ Role Variables
     tomcat_install_dir:     "/usr/local"
     catalina_home:          "{{ tomcat_install_dir }}/tomcat"
     webapps_dir:            "{{ catalina_home }}/webapps"
-    app_user:               "tomcat"
+    fcrepo_user:            "tomcat"
     java_opts:              "-Djava.awt.headless=true
                             -Dfile.encoding=UTF-8
                             -Dfcrepo.home={{ fcrepo_home }}
