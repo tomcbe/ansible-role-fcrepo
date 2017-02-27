@@ -27,10 +27,10 @@ Role Variables
     fcrepo_url:             "https://github.com/fcrepo{{ fcrepo_major_version }}/fcrepo{{ fcrepo_major_version }}/releases/download/fcrepo-{{ fcrepo_version }}/fcrepo-webapp-{{ fcrepo_version }}.war"
     fcrepo_checksum_algo:   "sha1"
     fcrepo_checksum_url:    "{{ fcrepo_url }}.{{ fcrepo_checksum_algo }}"
+    fcrepo_user:            "{{ tomcat_user | default('tomcat') }}"
     tomcat_install_dir:     "/usr/local"
     catalina_home:          "{{ tomcat_install_dir }}/tomcat"
     webapps_dir:            "{{ catalina_home }}/webapps"
-    fcrepo_user:            "tomcat"
     java_opts:              "-Djava.awt.headless=true
                             -Dfile.encoding=UTF-8
                             -Dfcrepo.home={{ fcrepo_home }}
