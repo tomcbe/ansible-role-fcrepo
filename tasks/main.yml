@@ -14,9 +14,10 @@
     name:   "{{ fcrepo_user }}"
     shell:  "/bin/bash"
 
+  # NOTE: remove filename (or anything else) if it is included after the checksum
 - name: get fedora checksum
   set_fact:
-    fcrepo_checksum: "{{ fcrepo_checksum_algo }}:{{ item }}"
+    fcrepo_checksum: "{{ fcrepo_checksum_algo }}:{{ item | regex_replace('\\s+.*', '') }}"
   with_url: "{{ fcrepo_checksum_url }}"
 
 - name: get fedora

@@ -23,7 +23,7 @@ Role Variables
     fcrepo_config_dir:      "/etc/fcrepo"
     fcrepo_log_dir:         "/var/log/fcrepo"
     fcrepo_major_version:   4
-    fcrepo_version:         4.7.0
+    fcrepo_version:         4.7.1
     fcrepo_url:             "https://github.com/fcrepo{{ fcrepo_major_version }}/fcrepo{{ fcrepo_major_version }}/releases/download/fcrepo-{{ fcrepo_version }}/fcrepo-webapp-{{ fcrepo_version }}.war"
     fcrepo_checksum_algo:   "sha1"
     fcrepo_checksum_url:    "{{ fcrepo_url }}.{{ fcrepo_checksum_algo }}"
