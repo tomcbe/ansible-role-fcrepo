@@ -12,6 +12,7 @@ fcrepo_url:             "https://github.com/fcrepo{{ fcrepo_major_version }}/fcr
 fcrepo_checksum_algo:   "sha1"
 fcrepo_checksum_url:    "{{ fcrepo_url }}.{{ fcrepo_checksum_algo }}"
 fcrepo_user:            "{{ tomcat_user | default('tomcat') }}"
+fcrepo_download_dir:    "{{ download_dir | default(ansible_env.HOME) }}"
 tomcat_install_dir:     "/usr/local"
 catalina_home:          "{{ tomcat_install_dir }}/tomcat"
 webapps_dir:            "{{ catalina_home }}/webapps"

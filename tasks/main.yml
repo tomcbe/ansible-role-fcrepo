@@ -23,11 +23,26 @@
 - name: get fedora
   get_url:
     url:      "{{ fcrepo_url }}"
-    dest:     "{{ webapps_dir }}"
+    dest:     "{{ fcrepo_download_dir }}"
     checksum: "{{ fcrepo_checksum }}"
     owner:    "{{ fcrepo_user }}"
     group:    "{{ fcrepo_user }}"
   register: got_fedora
+
+- name: remove previously deployed fedora, if we have a new war
+  file:
+    dest: "{{ webapps_dir }}/fedora"
+    state: absent
+  when: got_fedora.changed
+
+- name: check for deployed fedora
+  stat:
+    path: "{{ webapps_dir }}/fedora"
+  register: deployed_fedora
+
+- name: deploy fedora
+  command: "cp {{ fcrepo_download_dir }}/fcrepo-webapp-{{ fcrepo_version }}.war {{ webapps_dir }}/fedora.war"
+  when: not deployed_fedora.stat.exists
   notify: restart tomcat
 
 - name: create fedora directories
