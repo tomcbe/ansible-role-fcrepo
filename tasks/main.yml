@@ -22,7 +22,7 @@
 
 - name: get fedora
   get_url:
-    url:      "{{ fcrepo_url }}"
+    url:      "{{ fcrepo_download_url }}"
     dest:     "{{ fcrepo_download_dir }}"
     checksum: "{{ fcrepo_checksum }}"
     owner:    "{{ fcrepo_user }}"

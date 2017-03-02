@@ -24,9 +24,9 @@ Role Variables
     fcrepo_log_dir:         "/var/log/fcrepo"
     fcrepo_major_version:   4
     fcrepo_version:         4.7.1
-    fcrepo_url:             "https://github.com/fcrepo{{ fcrepo_major_version }}/fcrepo{{ fcrepo_major_version }}/releases/download/fcrepo-{{ fcrepo_version }}/fcrepo-webapp-{{ fcrepo_version }}.war"
+    fcrepo_download_url:    "https://github.com/fcrepo{{ fcrepo_major_version }}/fcrepo{{ fcrepo_major_version }}/releases/download/fcrepo-{{ fcrepo_version }}/fcrepo-webapp-{{ fcrepo_version }}.war"
     fcrepo_checksum_algo:   "sha1"
-    fcrepo_checksum_url:    "{{ fcrepo_url }}.{{ fcrepo_checksum_algo }}"
+    fcrepo_checksum_url:    "{{ fcrepo_download_url }}.{{ fcrepo_checksum_algo }}"
     fcrepo_user:            "{{ tomcat_user | default('tomcat') }}"
     tomcat_install_dir:     "/usr/local"
     catalina_home:          "{{ tomcat_install_dir }}/tomcat"
