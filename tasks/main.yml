@@ -1,15 +1,12 @@
 ---
 - name: Fetch Java version
   shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
-  register: actual_java_version
+  register: fcrepo_installed_java_version
+  changed_when: false
 
-- debug:
-    var: actual_java_version
-    
 - assert:
     that: 
-      - actual_java_version.stdout | version_compare('{{ java_version }}', '>=') 
-      
+      - "fcrepo_installed_java_version.stdout is version(fcrepo_required_java_version, '>=')"
 
 - name: add fcrepo user
   user:
