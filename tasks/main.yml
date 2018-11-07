@@ -1,13 +1,15 @@
 ---
-- name: get java version
-  shell:   "java -version 2>&1"
-  register: java_version_result
-  changed_when: false
+- name: Fetch Java version
+  shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
+  register: java_version
 
-- name: test java version
-  fail:
-    msg: "this installation of fedora requires java version {{ java_version }} or higher"
-  when:  "'{{ java_version }}' not in java_version_result.stdout"
+- debug:
+    var: java_version
+    
+- assert:
+    that: 
+      - java_version.stdout | version_compare('{{ java_version }}', '>=') 
+      
 
 - name: add fcrepo user
   user:
