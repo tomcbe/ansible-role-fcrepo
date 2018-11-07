@@ -1,14 +1,14 @@
 ---
 - name: Fetch Java version
   shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
-  register: java_version
+  register: actual_java_version
 
 - debug:
-    var: java_version
+    var: actual_java_version
     
 - assert:
     that: 
-      - java_version.stdout | version_compare('{{ java_version }}', '>=') 
+      - actual_java_version.stdout | version_compare('{{ java_version }}', '>=') 
       
 
 - name: add fcrepo user
