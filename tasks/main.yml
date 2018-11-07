@@ -30,17 +30,17 @@
 
 - name: remove previously deployed fedora, if we have a new war
   file:
-    dest: "{{ webapps_dir }}/fedora"
+    dest: "{{ fcrepo_webapps_dir }}/fedora"
     state: absent
   when: got_fedora.changed
 
 - name: check for deployed fedora
   stat:
-    path: "{{ webapps_dir }}/fedora"
+    path: "{{ fcrepo_webapps_dir }}/fedora"
   register: deployed_fedora
 
 - name: deploy fedora
-  command: "cp {{ fcrepo_download_dir }}/fcrepo-webapp-{{ fcrepo_version }}.war {{ webapps_dir }}/fedora.war"
+  command: "cp {{ fcrepo_download_dir }}/fcrepo-webapp-{{ fcrepo_version }}.war {{ fcrepo_webapps_dir }}/fedora.war"
   when: not deployed_fedora.stat.exists
   notify: restart tomcat
 

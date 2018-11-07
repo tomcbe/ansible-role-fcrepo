@@ -16,9 +16,9 @@ However, this role only supports Tomcat at this time.
 Role Variables
 --------------
 
-    java_version:           1.8
-    minimum_heap_size:      512
-    maximum_heap_size:      1024
+    fcrepo_required_java_version:           1.8
+    fcrepo_minimum_heap_size:      512
+    fcrepo_maximum_heap_size:      1024
     fcrepo_home:            "/etc/fcrepo/data"
     fcrepo_config_dir:      "/etc/fcrepo"
     fcrepo_log_dir:         "/var/log/fcrepo"
@@ -27,11 +27,11 @@ Role Variables
     fcrepo_download_url:    "https://github.com/fcrepo{{ fcrepo_major_version }}/fcrepo{{ fcrepo_major_version }}/releases/download/fcrepo-{{ fcrepo_version }}/fcrepo-webapp-{{ fcrepo_version }}.war"
     fcrepo_checksum_algo:   "sha1"
     fcrepo_checksum_url:    "{{ fcrepo_download_url }}.{{ fcrepo_checksum_algo }}"
-    fcrepo_user:            "{{ tomcat_user | default('tomcat') }}"
-    tomcat_install_dir:     "/usr/local"
-    catalina_home:          "{{ tomcat_install_dir }}/tomcat"
-    webapps_dir:            "{{ catalina_home }}/webapps"
-    java_opts:              "-Djava.awt.headless=true
+    fcrepo_user:            "{{ tomcat_user | default('fedoraAdmin') }}"
+    fcrepo_catalina_home:   "/usr/share/tomcat8"
+    fcrepo_catalina_base:   "/var/lib/tomcat8"
+    fcrepo_webapps_dir:     "{{ catalina_base }}/webapps"
+    fcrepo_java_opts:       "-Djava.awt.headless=true
                             -Dfile.encoding=UTF-8
                             -Dfcrepo.home={{ fcrepo_home }}
                             -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json
@@ -44,7 +44,7 @@ Role Variables
                             -XX:MaxMetaspaceSize=512M
                             -Xms{{ minimum_heap_size }}m
                             -Xmx{{ maximum_heap_size }}m"
-    catalina_opts:          "-server"
+    fcrepo_catalina_opts:          "-server"
 
 Dependencies
 ------------
