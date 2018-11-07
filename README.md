@@ -30,7 +30,7 @@ Role Variables
     fcrepo_user:            "{{ tomcat_user | default('fedoraAdmin') }}"
     fcrepo_catalina_home:   "/usr/share/tomcat8"
     fcrepo_catalina_base:   "/var/lib/tomcat8"
-    fcrepo_webapps_dir:     "{{ catalina_base }}/webapps"
+    fcrepo_webapps_dir:     "{{ fcrepo_catalina_base }}/webapps"
     fcrepo_java_opts:       "-Djava.awt.headless=true
                             -Dfile.encoding=UTF-8
                             -Dfcrepo.home={{ fcrepo_home }}
