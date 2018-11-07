@@ -1,13 +1,13 @@
 ---
 java_version:           1.8
-minimum_heap_size:      512
-maximum_heap_size:      1024
+minimum_heap_size:      1024
+maximum_heap_size:      2048
 # TODO: /mnt/data/fcrepo
 fcrepo_home:            "/etc/fcrepo/data"
 fcrepo_config_dir:      "/etc/fcrepo"
 fcrepo_log_dir:         "/var/log/fcrepo"
 fcrepo_major_version:   4
-fcrepo_version:         4.7.1
+fcrepo_version:         4.7.5
 fcrepo_download_url:    "https://github.com/fcrepo{{ fcrepo_major_version }}/fcrepo{{ fcrepo_major_version }}/releases/download/fcrepo-{{ fcrepo_version }}/fcrepo-webapp-{{ fcrepo_version }}.war"
 fcrepo_checksum_algo:   "sha1"
 fcrepo_checksum_url:    "{{ fcrepo_download_url }}.{{ fcrepo_checksum_algo }}"
