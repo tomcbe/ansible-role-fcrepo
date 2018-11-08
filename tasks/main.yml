@@ -10,7 +10,7 @@
 
 - name: add fcrepo user
   user:
-    name:   "{{ fcrepo_user }}"
+    name:   "{{ fcrepo_tomcat_service_user }}"
     shell:  "/bin/bash"
 
   # NOTE: remove filename (or anything else) if it is included after the checksum
@@ -24,8 +24,8 @@
     url:      "{{ fcrepo_download_url }}"
     dest:     "{{ fcrepo_download_dir }}"
     checksum: "{{ fcrepo_checksum }}"
-    owner:    "{{ fcrepo_user }}"
-    group:    "{{ fcrepo_user }}"
+    owner:    "{{ fcrepo_tomcat_service_user }}"
+    group:    "{{ fcrepo_tomcat_service_user }}"
   register: got_fedora
 
 - name: remove previously deployed fedora, if we have a new war
@@ -48,8 +48,8 @@
   file:
     path: "{{ item }}"
     state: directory
-    owner: "{{ fcrepo_user }}"
-    group: "{{ fcrepo_user }}"
+    owner: "{{ fcrepo_tomcat_service_user }}"
+    group: "{{ fcrepo_tomcat_service_user }}"
   with_items:
     - "{{ fcrepo_config_dir }}"
     - "{{ fcrepo_home }}"
