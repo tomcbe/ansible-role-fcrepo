@@ -1,7 +1,5 @@
 ---
 fcrepo_required_java_version: '1.8'
-fcrepo_minimum_heap_size:      1024
-fcrepo_maximum_heap_size:      2048
 # TODO: /mnt/data/fcrepo
 fcrepo_home:            "/etc/fcrepo/data"
 fcrepo_config_dir:      "/etc/fcrepo"
@@ -16,17 +14,4 @@ fcrepo_download_dir:    "{{ download_dir | default(ansible_env.HOME) }}"
 fcrepo_catalina_home:   "/usr/share/tomcat8"
 fcrepo_catalina_base:   "/var/lib/tomcat8"
 fcrepo_webapps_dir:     "{{ fcrepo_catalina_base }}/webapps"
-fcrepo_java_opts:       "-Djava.awt.headless=true
-                        -Dfile.encoding=UTF-8
-                        -Dfcrepo.home={{ fcrepo_home }}
-                        -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json
-                        -Dlogback.configurationFile={{ fcrepo_config_dir }}/logback.xml
-                        -XX:+UseConcMarkSweepGC
-                        -XX:+CMSClassUnloadingEnabled
-                        -XX:ConcGCThreads=5
-                        -XX:MaxGCPauseMillis=200
-                        -XX:ParallelGCThreads=20
-                        -XX:MaxMetaspaceSize=512M
-                        -Xms{{ minimum_heap_size }}m
-                        -Xmx{{ maximum_heap_size }}m"
-fcrepo_catalina_opts:   "-server"
+                        

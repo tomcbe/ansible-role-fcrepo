@@ -55,16 +55,16 @@
     - "{{ fcrepo_home }}"
     - "{{ fcrepo_log_dir }}"
 
-- name: create tomcat service directory for additional configuration
-  file:
-    path: "/etc/systemd/system/tomcat.service.d"
-    state: directory
-
-- name: set fedora system properties
-  template:
-    src: "fcrepo.conf.j2"
-    dest: "/etc/systemd/system/tomcat.service.d/fcrepo.conf"
-  notify: restart tomcat
+# - name: create tomcat service directory for additional configuration
+#   file:
+#     path: "/etc/systemd/system/tomcat.service.d"
+#     state: directory
+# 
+# - name: set fedora system properties
+#   template:
+#     src: "fcrepo.conf.j2"
+#     dest: "/etc/systemd/system/tomcat.service.d/fcrepo.conf"
+#   notify: restart tomcat
 
 - name: configure fedora logging
   template:

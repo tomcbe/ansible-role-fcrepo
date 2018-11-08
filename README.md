@@ -13,6 +13,7 @@ Tomcat 7 or later
 NOTE: Fedora can run on any servlet 3.0 container, including Jetty 9.x or later.
 However, this role only supports Tomcat at this time.
 
+
 Role Variables
 --------------
 
@@ -27,24 +28,10 @@ Role Variables
     fcrepo_download_url:    "https://github.com/fcrepo{{ fcrepo_major_version }}/fcrepo{{ fcrepo_major_version }}/releases/download/fcrepo-{{ fcrepo_version }}/fcrepo-webapp-{{ fcrepo_version }}.war"
     fcrepo_checksum_algo:   "sha1"
     fcrepo_checksum_url:    "{{ fcrepo_download_url }}.{{ fcrepo_checksum_algo }}"
-    fcrepo_user:            "{{ tomcat_user | default('fedoraAdmin') }}"
+    fcrepo_user:            "fedoraAdmin"
     fcrepo_catalina_home:   "/usr/share/tomcat8"
     fcrepo_catalina_base:   "/var/lib/tomcat8"
     fcrepo_webapps_dir:     "{{ fcrepo_catalina_base }}/webapps"
-    fcrepo_java_opts:       "-Djava.awt.headless=true
-                            -Dfile.encoding=UTF-8
-                            -Dfcrepo.home={{ fcrepo_home }}
-                            -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json
-                            -Dlogback.configurationFile={{ fcrepo_config_dir }}/logback.xml
-                            -XX:+UseConcMarkSweepGC
-                            -XX:+CMSClassUnloadingEnabled
-                            -XX:ConcGCThreads=5
-                            -XX:MaxGCPauseMillis=200
-                            -XX:ParallelGCThreads=20
-                            -XX:MaxMetaspaceSize=512M
-                            -Xms{{ minimum_heap_size }}m
-                            -Xmx{{ maximum_heap_size }}m"
-    fcrepo_catalina_opts:          "-server"
 
 Dependencies
 ------------
@@ -71,3 +58,4 @@ Author Information
 ------------------
 
 Drew Heles
+
