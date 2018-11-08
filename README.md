@@ -28,7 +28,7 @@ Role Variables
     fcrepo_download_url:    "https://github.com/fcrepo{{ fcrepo_major_version }}/fcrepo{{ fcrepo_major_version }}/releases/download/fcrepo-{{ fcrepo_version }}/fcrepo-webapp-{{ fcrepo_version }}.war"
     fcrepo_checksum_algo:   "sha1"
     fcrepo_checksum_url:    "{{ fcrepo_download_url }}.{{ fcrepo_checksum_algo }}"
-    fcrepo_user:            "fedoraAdmin"
+    fcrepo_tomcat_service_user: "{{ tomcat_service_user | default('tomcat') }}"
     fcrepo_catalina_home:   "/usr/share/tomcat8"
     fcrepo_catalina_base:   "/var/lib/tomcat8"
     fcrepo_webapps_dir:     "{{ fcrepo_catalina_base }}/webapps"
